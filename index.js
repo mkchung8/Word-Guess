@@ -1,7 +1,7 @@
 var inquirer = require("inquirer");
 var Word = require("./word.js");
 
-var wordArr = ["bassnectar", "black sun empire", "habstrakt", "oliver heldens", "kaskade", "noisia"];
+var wordList = ["bassnectar", "black sun empire", "habstrakt", "oliver heldens", "kaskade", "noisia"];
 var guessesLeft = 10;
 var inputLetters = "abcdefghijklmnopqrstuvwxyz";
 var guessesIncorrect = [];
@@ -27,7 +27,8 @@ inquirer
 function gamePlay () {
     var generateWord = wordArr[Math.floor(Math.random() * wordArr.length)];
     var wordSelected = new Word (generateWord); 
-    
+    var wordCheckArr = [];
+    var wordComplete = [];
 
     inquirer
         .prompt([
@@ -38,6 +39,10 @@ function gamePlay () {
             }
         ])
         .then(function (input) {
-            wordSelected.userGuess(input)
+            wordSelected.userGuess(input.letterinput);
+            wordSelected.wordArr.forEach(wordCheck)
+            var wordCheck = function () {
+                wordCheckArr.push(key.guessed)
+            }
         });
 }
